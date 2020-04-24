@@ -5,6 +5,7 @@
   "version": "0.1.0",
   "author": "Kyle Mathews <mathews.kyle@gmail.com>",
   "dependencies": {
+    "axios": "^0.19.2",
     "gatsby": "^2.20.25",
     "gatsby-image": "^2.3.4",
     "gatsby-plugin-manifest": "^2.3.5",
@@ -13,12 +14,15 @@
     "gatsby-plugin-sharp": "^2.5.6",
     "gatsby-source-filesystem": "^2.2.4",
     "gatsby-transformer-sharp": "^2.4.6",
+    "netlify-identity-widget": "^1.5.6",
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-helmet": "^6.0.0"
   },
   "devDependencies": {
+    "concurrently": "^5.1.0",
+    "netlify-lambda": "^1.6.3",
     "prettier": "2.0.4"
   },
   "keywords": [
@@ -26,8 +30,8 @@
   ],
   "license": "MIT",
   "scripts": {
-    "build": "gatsby build",
-    "develop": "gatsby develop",
+    "build": "gatsby build && netlify-lambda build lambda-src",
+    "develop": "concurrently \"gatsby develop\" \"npm run lambda-serve\"",
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
     "start": "npm run develop",
     "serve": "gatsby serve",
