@@ -1,4 +1,4 @@
-[build]
+[buildit]
   command = "npm run build"
   functions = "lambda" #  netlify-lambda reads this
   publish = "my-gatsby-project/public"
