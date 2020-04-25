@@ -28,7 +28,7 @@ exports.handler = async (event, context) => {
 
   try {
     const result = await axios.post(
-      "https://rubbergoose.herokuapp.com/v1/graphql",
+      "https://peterkaa-act8.herokuapp.com/v1/graphql",
       responseBody,
       {
         headers: {
