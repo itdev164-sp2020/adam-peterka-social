@@ -3,11 +3,10 @@ import { Router } from "@reach/router"
 import Layout from "../components/layout"
 import PrivateRoute from "../components/private-route"
 import Login from "../components/login"
+import { Default } from "../components/default"
 
 const Profile = () => <h1>Profile</h1>
 const Details = () => <h1>Details</h1>
-const Default = () => <h1>Default</h1>
-
 const App = () => {
   return (
     <Layout>
