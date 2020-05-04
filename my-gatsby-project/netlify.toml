@@ -1,4 +1,4 @@
 [build]
   command = "yarn build"
   functions = "lambda" #  netlify-lambda reads this
-  publish = "my-gatsby-project/public/"
+  publish = "my-gatsby-project/public"
