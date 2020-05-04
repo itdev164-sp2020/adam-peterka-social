@@ -1,5 +1,5 @@
-import React from "react"
-import { useQuery } from "@apollo/react-hooks"
+import React, { useState } from "react"
+import { useQuery, useMutation } from "@apollo/react-hooks"
 import gql from "graphql-tag"
 
 const GET_POSTS = gql`
@@ -16,6 +16,14 @@ const GET_POSTS = gql`
     }
   }
 `
+
+const SET_POST = gql`
+  mutation MyMutation($title: String!, $content: String!) {
+    insert_posts(objects: { title: $title, content: $content }) {
+      affected_rows
+    }
+  }
+`
 const Post = ({ post }) => {
   return (
     <div>
@@ -24,6 +32,52 @@ const Post = ({ post }) => {
       </h3>
       <div>{post.content}</div>
     </div>
+  )
+}
+
+const PostEditor = () => {
+  const [post, setPost] = useState({ title: "", content: "" })
+  const [createPost, { data }] = useMutation(SET_POST)
+  const handleChange = e => {
+    setPost({
+      ...post,
+      [e.target.name]: e.target.value,
+    })
+  }
+
+  const handleSubmit = async e => {
+    e.preventDefault()
+    await createPost({
+      variable: { title: post.title, content: post.content },
+    })
+    setPost({ title: "", content: "" })
+  }
+  return (
+    <form onSubmit={handleSubmit}>
+      <p>
+        <label htmlFor="title">title</label>
+        <input
+          type="text"
+          onChange={handleChange}
+          name="title"
+          id="title"
+          defaultValue={post.title}
+          placeholer="Insert a title"
+        />
+      </p>
+      <p>
+        <label htmlFor="content">content</label>
+        <input
+          type="text"
+          defaultValue={post.content}
+          onChange={handleChange}
+          name="content"
+          id="content"
+          placeholder="Insert content"
+        />
+      </p>
+      <button type="submit">Create</button>
+    </form>
   )
 }
 export default () => {
@@ -37,6 +91,7 @@ export default () => {
 
   return (
     <div>
+      <PostEditor />
       {data.posts.map(p => (
         <Post post={p}></Post>
       ))}
