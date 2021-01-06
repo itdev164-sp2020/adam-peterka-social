@@ -10,7 +10,7 @@
     "apollo-client": "^2.6.8",
     "apollo-link": "^1.2.14",
     "apollo-link-http": "^1.5.17",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "gatsby": "^2.20.25",
     "gatsby-image": "^2.3.4",
     "gatsby-plugin-manifest": "^2.3.5",
